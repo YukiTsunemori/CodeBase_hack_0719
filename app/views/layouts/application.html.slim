@@ -23,4 +23,7 @@ html
     = javascript_include_tag "application", "data-turbo-track": "reload", type: "module"
 
   body
-    = yield
+    = render "layouts/navbar"
+    .container
+      = yield
+      = render "layouts/footer"
