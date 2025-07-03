@@ -22,9 +22,12 @@ html
     = stylesheet_link_tag :application, "data-turbo-track": "reload"
     = javascript_include_tag :application, "data-turbo-track": "reload", type: "module"
 
-  body
+  body.bg-body-tertiary
     = render "layouts/navbar"
     .container
       = render "layouts/flash"
       = yield
       = render "layouts/footer"
+      -if Rails.env.development?
+      .debug-info
+        = "#{controller.controller_name}##{controller.action_name}"
