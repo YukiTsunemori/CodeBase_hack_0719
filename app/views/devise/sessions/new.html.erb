@@ -1,0 +1,40 @@
+<div class="body d-flex align-items-center py-4">
+  <div class="main form-signin w-100 m-auto">
+    <h3>Log in</h3>
+
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <ul>
+        <% if notice %>
+          <li class="notice"><%= notice %></li>
+        <% end %>
+
+        <% if alert %>
+          <li class="alert"><%= alert %></li>
+        <% end %>
+      </ul>
+
+      <div class="form-floating w-50 mb-3">
+        <%= f.label :email %>
+        <br>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control mt-4" %>
+      </div>
+
+      <div class="form-floating w-50 mb-3">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+          <em>
+            (<%= @minimum_password_length %> characters minimum)
+          </em>
+        <% end %>
+        <br>
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control mt-4" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
