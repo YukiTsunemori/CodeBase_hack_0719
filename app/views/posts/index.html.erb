@@ -1,2 +1,2 @@
-<div><%= current_user.email %></div>
-<div><%= current_user.name %></div>
+<div><%= current_user.email unless current_user.nil? %></div>
+<div><%= current_user.name unless current_user.nil? %></div>
