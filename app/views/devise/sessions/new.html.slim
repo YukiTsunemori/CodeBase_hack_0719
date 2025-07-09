@@ -2,8 +2,14 @@
   .main.form-signin.w-100.m-auto
     h3 Log in
 
-    = form_for(@user, as: resource_name, url: session_path(resource_name)) do |f|
-      = render "devise/shared/error_messages", resource: @user
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      ul
+        - if notice
+          li.notice = notice
+
+        - if alert
+          li.alert = alert
+
 
       .form-floating.w-50.mb-3
         = f.label :email
