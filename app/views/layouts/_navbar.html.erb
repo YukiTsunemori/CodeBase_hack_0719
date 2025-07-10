@@ -1,4 +1,3 @@
-<% if user_signed_in? %>
 <header class="p-3 text-bg-dark">
   <div class="container">
     <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
@@ -12,17 +11,17 @@
         <li><%= link_to "Profile", edit_user_registration_path, class: "nav-link px-2 text-white" %></li>
       </ul>
       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-        <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..." aria-label="Search">
+        <input type="search" class="form-control form-control-dark text-bg-white" placeholder="Search..." aria-label="Search">
       </form>
         <% if current_user.nil? %>
         <div class="text-end">
-            <button type="button" class="btn btn-outline-light me-2">Login</button>
-            <button type="button" class="btn btn-warning">Sign-up</button>
+            <%= link_to "Sign-in", new_user_session_path, class: "btn btn-outline-light me-2" %>
+            <%= link_to "Sign-up", new_user_registration_path, class: "btn btn-warning" %>
         </div>
         <% else %> 
-            <button type="button"><%= link_to "ログアウト", destroy_user_session_path, data: { turbo_method: :delete } %></button>
+            <%= link_to "Sign-out", destroy_user_session_path, data: { turbo_method: :delete },
+            class: "btn btn-warning" %>
         <% end %>
     </div>
   </div>
 </header>
-<% end %>
