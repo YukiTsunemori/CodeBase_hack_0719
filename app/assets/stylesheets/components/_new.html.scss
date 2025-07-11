@@ -1,10 +1,15 @@
+/*
+  より堅牢で再利用性の高いCSSの提案
+  - IDではなく、要素の構造と順序にスタイルを適用する
+  - これによりサインイン・サインアップ両方のページで同じCSSが使える
+*/
 html,
 body {
   height: 100%;
 }
 
 .form-signin {
-  max-width: 330px;
+  max-width: 400px;
   padding: 1rem;
 }
 
@@ -12,14 +17,25 @@ body {
   z-index: 2;
 }
 
-.form-signin input[type="email"] {
+/* フォーム内の最初に出てくる入力欄のスタイル */
+/* 例: サインアップの名前(Name)欄、サインインのEメール(Email)欄 */
+.form-signin .form-floating:first-of-type input {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.form-signin input[type="password"] {
+/* フォーム内の最後に出てくる入力欄のスタイル */
+/* 例: サインアップのパスワード確認(PasswordConfirmation)欄、サインインのパスワード(Password)欄 */
+.form-signin .form-floating:last-of-type input {
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+/* フォーム内の最初と最後"以外"（つまり中間）の入力欄のスタイル */
+/* 例: サインアップのEメール(Email)欄やパスワード(Password)欄 */
+.form-signin .form-floating:not(:first-of-type):not(:last-of-type) input {
+  margin-bottom: -1px;
+  border-radius: 0; /* 中間はすべての角を四角くする */
 }
