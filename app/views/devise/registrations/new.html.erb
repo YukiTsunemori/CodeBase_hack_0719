@@ -1,44 +1,33 @@
-<div class="body d-flex align-items-center py-4">
-  <div class="main form-signin w-100 m-auto">
-    <h3>Sign up</h3>
-
-    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<body class="d-flex align-items-center py-4 bg-body-tertiary">
+  <main class="form-signin w-100 m-auto">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "text-center" }) do |f| %>
+      <%= image_tag "image.png", class: "mb-4", alt: "", width: 72, height: 57, loading: "lazy" %>
+      <h1 class="h3 mb-3 fw-normal">Sign in</h1>
       <%= render "devise/shared/error_messages", resource: resource %>
-
-      <div class="form-floating w-50 mb-3">
-        <%= f.label :name %>
-        <br>
-        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control mt-4" %>
+      
+      <div class="form-floating">
+        <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control", id: "floatingName", placeholder: "Name" %>
+        <%= f.label :name, "Name", for: "floatingName" %>
       </div>
 
-      <div class="form-floating w-50 mb-3">
-        <%= f.label :email %>
-        <br>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control mt-4" %>
+      <div class="form-floating">
+        <%= f.email_field :email, autocomplete: "email", class: "form-control", id: "floatingEmail", placeholder: "name@example.com" %>
+        <%= f.label :email, "Email", for: "floatingEmail" %>
       </div>
 
-      <div class="form-floating w-50 mb-3">
-        <%= f.label :password %>
-        <% if @minimum_password_length %>
-          <em>
-            (<%= @minimum_password_length %> characters minimum)
-          </em>
-        <% end %>
-        <br>
-        <%= f.password_field :password, autocomplete: "new-password", class: "form-control mt-4" %>
+      <div class="form-floating">
+        <%= f.password_field :password, autocomplete: "new-password", class: "form-control", id: "floatingPassword", placeholder: "Password (#{@minimum_password_length} characters minimum)" %>
+        <%= f.label :password, "Password", for: "floatingPassword" %>
       </div>
 
-      <div class="form-floating w-50 mb-3">
-        <%= f.label :password_confirmation %>
-        <br>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control mt-4" %>
+      <div class="form-floating">
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", id: "floatingPasswordConfirmation", placeholder: "Password Confirmation" %>
+        <%= f.label :password_confirmation, "Password Confirmation", for: "floatingPasswordConfirmation" %>
       </div>
 
-      <div class="form-group">
-        <%= f.submit "Submit", class: "btn btn-primary" %>
-      </div>
+      <%= f.submit "Sign up", class: "btn btn-primary w-100 py-2" %>
     <% end %>
 
     <%= render "devise/shared/links" %>
-  </div>
-</div>
+  </main>
+</body>
