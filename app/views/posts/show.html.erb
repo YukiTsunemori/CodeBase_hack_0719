@@ -1,2 +1,15 @@
-h1 Posts#show
-p Find me in app/views/posts/show.html.slim
+<div class="card text-center">
+    <div class="card-body">
+        <%= @post.text %>
+    </div>
+    <% @replies.each do |reply| %>
+    <div class="card-body">
+        <%= reply.text %>
+    </div>
+    <% end %>
+    <%= simple_form_for [ @post, @reply ] do |f| %>
+        <%= f.input :text %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= f.button :submit, "Submit", class: "btn btn-primary" %>
+    <% end %>
+</div>

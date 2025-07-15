@@ -1,2 +1,35 @@
-<div><%= current_user.email unless current_user.nil? %></div>
-<div><%= current_user.name unless current_user.nil? %></div>
+<div class="card text-center">
+  <div class="card-body">
+    <p class="card-text">
+      <%= simple_form_for @post do |f| %>
+        <%= f.textarea :text, placeholder: "今日は何をつぶやきますか？", class: "form-control" %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= f.button :submit, "Submit", class: "btn btn-primary" %>
+      <% end %>
+    </p>
+  </div>
+</div>
+
+<% if notice %>
+  <div class="alert alert-success"><%= notice %></div>
+<% end %>
+<% if alert %>
+  <div class="alert alert-danger"><%= alert %></div>
+<% end %>
+
+<% if @posts.nil? %>
+  <p class="card-text">投稿はまだありません。</p>
+<% else %>
+  <div class="card text-center">
+    <% @posts.each do |post| %>
+    <%= link_to post_path(post), class: "card-body" do %>
+      <div class="card-body">
+        <p class="card-text"><%= post.text %></p>
+      </div>
+      <div class="card-footer text-body-secondary">
+        <%= post.id %>
+    <% end %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
