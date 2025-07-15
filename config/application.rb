@@ -1,28 +1,17 @@
 require_relative "boot"
 
 require "rails/all"
-
-# Require the gems listed in Gemfile, including any gems
-# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
 module Posting
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 8.0
-    config.generators.templete_engine = :slim
-    # Please, add to the `ignore` list any other `lib` subdirectories that do
-    # not contain `.rb` files, or that should not be reloaded or eager loaded.
-    # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
     config.action_view.field_error_proc = Proc.new { |html_tag, instance| html_tag }
+    # Railsはエラー時に自動で div.field_with_errors を付ける。それをやめて、デザイン崩れを防いだり独自の表示にしたいときに、
+    # この一文を追加する。
 
-    # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
     config.time_zone = "Asia/Tokyo"
-    # config.eager_load_paths << Rails.root.join("extras")
   end
 end
