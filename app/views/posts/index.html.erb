@@ -1,3 +1,4 @@
+<% if user_signed_in? %>
 <div class="card text-center">
   <div class="card-body">
     <p class="card-text">
@@ -9,6 +10,20 @@
     </p>
   </div>
 </div>
+<% else %>
+<div class="card text-center">
+  <div class="card-body">
+    <h1>さぁ、登録してみんなで投稿しよう！</h1>
+  </div>
+    <%= link_to new_user_registration_path, class: "btn btn-primary" do %>
+    <h5>Sign Upはこちら</h5>
+    <% end %>
+    <%= link_to new_user_session_path, class: "btn btn-warning" do %>
+    <h5>Sign Inはこちら</h5>
+    <% end %>
+
+</div>
+<% end %>
 
 <% if notice %>
   <div class="alert alert-success"><%= notice %></div>
