@@ -2,7 +2,8 @@ class PostsController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :index ], controller: :posts
   def index
     @post = Post.new
-    @posts = Post.ordered
+    @posts = Post.joins(:user).select("posts.id, posts.text, posts.created_at, users.name as post_user").ordered
+    # binding.irb
   end
 
   def new
@@ -26,8 +27,23 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = Post.find(params[:id])
+    if @post.destroy
+      redirect_to root_path, notice: "Post was successfully deleted."
+    else
+      flash.now[:alert] = "Post could not be deleted."
+      render :index, status: :unprocessable_entity
+    end
+
+  end
+
    private
     def post_params
-      params.require(:post).permit(:text, :user_id)
+      params.require(:post).permit(:text, :post_user)
     end
+
+    # def post_user
+    #   user = Post.where([:user_id])
+    # end
 end
