@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id]) # 投稿のidをもとに投稿を選択
-    @replies = @post.replies.ordered # 投稿に関連づけられた返信を一覧で取得
+    @replies = Reply.joins(:user).select("replies.id, replies,text, replies.created_at, users.name as reply_user").ordered # 投稿に関連づけられた返信を一覧で取得
     @reply = @post.replies.build # 投稿に関連づけられたオブジェクトを生成
   end
 
@@ -35,7 +35,6 @@ class PostsController < ApplicationController
       flash.now[:alert] = "Post could not be deleted."
       render :index, status: :unprocessable_entity
     end
-
   end
 
    private

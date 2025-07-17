@@ -1,15 +1,31 @@
-<div class="card text-center">
-    <div class="card-body">
-        <%= @post.text %>
-    </div>
-    <% @replies.each do |reply| %>
-    <div class="card-body">
-        <%= reply.text %>
-    </div>
-    <% end %>
-    <%= simple_form_for [ @post, @reply ] do |f| %>
-        <%= f.input :text %>
-        <%= f.hidden_field :user_id, :value => current_user.id %>
-        <%= f.button :submit, "Submit", class: "btn btn-primary" %>
-    <% end %>
+<div class="card mb-3">
+  <div class="card-body">
+    <p class="card-text"><%= @post.text %></p>
+  </div>
+  <div class="card-footer text-body-secondary justify-content-between align-items-center text-end">
+    <span class="text-muted"><%= @post.user.name if @post.user %></span>
+    <span class="text-muted">| <%= l @post.created_at, format: :short %></span>
+  </div>
 </div>
+
+<% @replies.each do |reply| %>
+  <div class="card mb-3 ms-4">
+    <div class="card-body">
+      <p class="card-text"><%= reply.text %></p>
+    </div>
+    <div class="card-footer text-body-secondary justify-content-between align-items-center text-end">
+      <span class="text-muted"><%= reply.reply_user %></span>
+      <span class="text-muted">| <%= l reply.created_at, format: :short %></span>
+    </div>
+  </div>
+<% end %>
+
+  <div class="card text-center mt-4">
+    <div class="card-body">
+      <%= simple_form_for [@post, @reply] do |f| %>
+        <%= f.input :text, placeholder: "返信を入力してください", class: "form-control" %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.button :submit, "Submit", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
