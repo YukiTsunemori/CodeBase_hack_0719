@@ -18,7 +18,7 @@ class PostsController < ApplicationController
   def create
      # 現在のユーザーに関連付けて投稿をビルドします。
     # これにより、post.user_id が自動的に current_user.id に設定されます。
-    @post = current_user.post.build(post_params)
+    @post = current_user.posts.build(post_params)
 
     # 投稿の保存に失敗した場合に備え、@posts を再取得します。
     # これにより、render :index が呼び出されたときに、
