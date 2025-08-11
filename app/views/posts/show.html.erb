@@ -29,8 +29,11 @@
 
 <% @replies.each do |reply| %>
   <div class="card mb-3 ms-4">
-    <div class="card-body">
-      <p class="card-text"><%= reply.text %></p>
+    <div class="card-body d-flex justify-content-between align-items-center">
+      <p class="card-text mb-0"><%= reply.text %></p>
+      <div class="text-end">
+        <%= button_to "Delete Reply", post_reply_path(reply), method: :delete, class: "btn btn-outline-danger btn-sm" %>
+      </div>
     </div>
     <div class="card-footer text-body-secondary justify-content-between align-items-center text-end">
       <span class="text-muted"><%= reply.reply_user %></span>
